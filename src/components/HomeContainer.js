@@ -7,9 +7,10 @@ const HomeContainer = () => {
     const result = useSelector(state => state.customer)
     return (
         <div className="welcome">
-            {!result.data && !result.error && <h1>Welcome User</h1>}
+            {!result.data.length && !result.error && <h1>Welcome User</h1>}
             {/* {result.running && <p>Loading .... </p>}             */}
-            {!!result.data.id && <CustSummaryCard data={result.data}></CustSummaryCard>}
+            {!!result.data.length && result.data.map(cust => <CustSummaryCard key={cust.id} data={cust}></CustSummaryCard>)}
+            {result.error && <h1>{result.error}</h1>}
         </div>
     );
 };

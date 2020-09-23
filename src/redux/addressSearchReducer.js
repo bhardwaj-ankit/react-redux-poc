@@ -27,7 +27,7 @@ const addressSearchReducer = (state = initialState, action) => {
         ...state,
         // running: false,
         data: [],
-        error: true
+        error: action.payload
       }
     case 'CLEAR_ADDRESS_SEARCH': 
       return {

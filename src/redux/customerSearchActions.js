@@ -8,7 +8,7 @@ export const searchCustomer = () => {
       .then(res => {
         const rand = Math.floor(Math.random() * 100)
         // console.log('random number : ' + rand)
-        const data = res.data[rand]
+        const data = res.data
         // console.log('Data  ' + data)
         dispatch(searchCustomerSuccess(data))
       })

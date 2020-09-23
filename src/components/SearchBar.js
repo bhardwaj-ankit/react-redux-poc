@@ -3,43 +3,44 @@ import { connect } from 'react-redux'
 import Input from '../components/Input'
 import { searchCustomer, clearCustomerSearch } from '../redux/customerSearchActions'
 import SearchFilter from './SearchFilter'
+import { useSelector, useDispatch } from 'react-redux'
 
-const SearchBar = ({ userData, searchCustomer, clearCustomerSearch }) => {
-    
+const SearchBar = () => {
+    const data = useSelector(state => state.customer)
+    const dispatch = useDispatch()
+
     const searchCust = (val) => {
-        console.log()
-        searchCustomer()
+        dispatch(searchCustomer())
     };
 
     const clearSearch = () => {
 
-        clearCustomerSearch()
+        dispatch(clearCustomerSearch())
     };
 
-    return (<><Input></Input>
-
-        <button onClick={searchCust}>Search</button>
-
-        <button onClick={clearSearch}>Clear</button>
-        <SearchFilter call={()=>searchCust()}></SearchFilter>
-    </>)
+    return (
+        <>
+            <Input></Input>
+            <div>Search Status : {data.data.length}</div>
+            <button onClick={searchCust}>Search</button>
+            <button onClick={clearSearch}>Clear</button>
+            <SearchFilter call={() => searchCust()}></SearchFilter>
+        </>
+    )
 
 }
 
-const mapStateToProps = state => {
-    return {
-        userData: state.data
-    }
-}
+// const mapStateToProps = state => {
+//     return {
+//         userData: state.data
+//     }
+// }
 
-const mapDispatchToProps = dispatch => {
-    return {
-        searchCustomer: () => dispatch(searchCustomer()),
-        clearCustomerSearch: () => dispatch(clearCustomerSearch())
-    }
-}
+// const mapDispatchToProps = dispatch => {
+//     return {
+//         searchCustomer: () => dispatch(searchCustomer()),
+//         clearCustomerSearch: () => dispatch(clearCustomerSearch())
+//     }
+// }
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(SearchBar)
+export default SearchBar;
